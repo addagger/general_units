@@ -1,23 +1,24 @@
-# coding: utf-8
+# -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'general_units/version'
 
-Gem::Specification.new do |spec|
-  spec.name          = "general_units"
-  spec.version       = GeneralUnits::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+Gem::Specification.new do |gem|
+  gem.name          = "general_units"
+  gem.version       = GeneralUnits::VERSION
+  gem.authors       = ["Valery Kvon"]
+  gem.email         = ["addagger@gmail.com"]
+  gem.homepage      = %q{http://vkvon.ru/projects/general_units}
+  gem.description   = %q{World's units}
+  gem.summary       = %q{Weight Length Power and other general units}
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  gem.rubyforge_project = "general_units"
 
-  spec.add_development_dependency "bundler", "~> 1.5"
-  spec.add_development_dependency "rake"
+  gem.add_development_dependency "i18n", '~> 0.6'
+
+  gem.files         = `git ls-files`.split($/)
+  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.require_paths = ["lib"]
+  gem.licenses       = ['MIT']
 end
