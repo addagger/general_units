@@ -6,6 +6,14 @@ module GeneralUnits
     included do
     end
     
+    def weight_units_for_select
+      Weight::UNITS.map {|k,v| [v, k]}
+    end
+    
+    def length_units_for_select
+      Length::UNITS.map {|k,v| [v, k]}
+    end
+    
   end
   
 end
