@@ -4,6 +4,8 @@ module GeneralUnits
     def self.extend_class(klass)
       unit_name = klass.name.split("::").last.underscore
       klass.class_eval <<-EOV
+        delegate :to_f, :to_d, :to_i, :to => :amount
+      
         def -@
           #{klass.name}.new(-amount, unit)
         end
@@ -37,6 +39,16 @@ module GeneralUnits
         def <(other_object)
           other_object = other_object.is_a?(#{klass.name}) ? other_object.convert_to(unit) : other_object.to_#{unit_name}
           amount < other_object.amount
+        end
+        
+        def >=(other_object)
+          other_object = other_object.is_a?(#{klass.name}) ? other_object.convert_to(unit) : other_object.to_#{unit_name}
+          amount >= other_object.amount
+        end
+       
+        def <=(other_object)
+          other_object = other_object.is_a?(#{klass.name}) ? other_object.convert_to(unit) : other_object.to_#{unit_name}
+          amount <= other_object.amount
         end
       
         def positive?
@@ -74,7 +86,7 @@ module GeneralUnits
         end
 
         def div(value)
-          self / value
+          amount.div(value)
         end
 
         def divmod(val)

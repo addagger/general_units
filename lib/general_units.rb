@@ -4,6 +4,7 @@ module GeneralUnits
   def self.load!
     load_units!
     load_numeric!
+    load_derivatives!
     require 'general_units/engine'
     require 'general_units/railtie'
   end
@@ -15,6 +16,10 @@ module GeneralUnits
   
   def self.load_numeric!
     require 'general_units/numeric'
+  end
+  
+  def self.load_derivatives!
+    require 'general_units/derivatives/box'
   end
 
 end
