@@ -5,9 +5,10 @@ module GeneralUnits
     ::GeneralUnits::Arithmetics.extend_class(self)
     
     class Unit
-      attr_reader :name, :short, :grams
+      attr_reader :code, :name, :short, :grams
   
-      def initialize(name, short, grams)
+      def initialize(code, name, short, grams)
+        @code = code
         @name = name.to_s
         @short = short.to_s
         @grams = grams.to_d
@@ -18,18 +19,18 @@ module GeneralUnits
       end
   
       def inspect
-        "\"#{name}\""
+        code
       end
     end
 
-    UNITS = {:short_ton_us => Unit.new("Short ton (US)", "Sht.", 907184.74),
-             :pound_us => Unit.new("Pound (US)", "Pnd.", 453.59237),
-             :ounce_us => Unit.new("Ounce (US)", "Ounce", 28.349523),
-             :stone => Unit.new("Stone", "Stn", 6350.2932),
-             :long_ton_uk => Unit.new("Long Ton (UK)", "Lngt.", 1016046.9),
-             :metric_ton => Unit.new("Metric Ton", "Ton", 1000000.0),
-             :kilogram => Unit.new("Kilogram", "Kg.", 1000.0),
-             :gram => Unit.new("Gram", "g.", 1.0)}
+    UNITS = [Unit.new(:short_ton_us, "Short ton (US)", "Sht.", 907184.74),
+             Unit.new(:pound_us, "Pound (US)", "Pnd.", 453.59237),
+             Unit.new(:ounce_us, "Ounce (US)", "Ounce", 28.349523),
+             Unit.new(:stone, "Stone", "Stn", 6350.2932),
+             Unit.new(:long_ton_uk, "Long Ton (UK)", "Lngt.", 1016046.9),
+             Unit.new(:metric_ton, "Metric Ton", "Ton", 1000000.0),
+             Unit.new(:kilogram, "Kilogram", "Kg.", 1000.0),
+             Unit.new(:gram, "Gram", "g.", 1.0)]
 
     attr_reader :amount, :unit
     delegate :to_f, :to => :amount
@@ -48,8 +49,12 @@ module GeneralUnits
       end
     end
 
-    def to_s(round = 2)
-      "#{to_f.round(round)} #{unit.short}"
+    def to_s(round = nil)
+      "#{to_f.round(round||2)}"
+    end
+    
+    def formatted(round = nil)
+      "#{to_s(round)} #{unit.short}"
     end
 
     def to_weight
@@ -60,10 +65,8 @@ module GeneralUnits
 
     def valid_unit?(unit)
       unit_object = case unit
-      when String then UNITS[unit.to_sym]
-      when Symbol then UNITS[unit]
+      when String, Symbol then UNITS.find {|u| u.code.to_s == unit.to_s}
       when Unit then unit
-      else UNITS[unit.to_s.to_sym]
       end
       unit_object || raise(TypeError, "Unprocessable unit #{unit.inspect}")
     end

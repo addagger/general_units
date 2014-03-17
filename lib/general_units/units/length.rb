@@ -5,9 +5,10 @@ module GeneralUnits
     ::GeneralUnits::Arithmetics.extend_class(self)
     
     class Unit
-      attr_reader :name, :short, :millimeters
+      attr_reader :code, :name, :short, :millimeters
   
-      def initialize(name, short, millimeters)
+      def initialize(code, name, short, millimeters)
+        @code = code
         @name = name.to_s
         @short = short.to_s
         @millimeters = millimeters.to_d
@@ -18,19 +19,19 @@ module GeneralUnits
       end
   
       def inspect
-        "\"#{name}\""
+        code
       end
     end
 
-    UNITS = {:mile_nautical => Unit.new("Mile (nautical)", "mln.", 1852000.0),
-             :mile => Unit.new("Mile", "ml.", 1609344.0),
-             :yard => Unit.new("Yard", "yrd.", 914.4),
-             :foot => Unit.new("Foot", "ft.", 304.8),
-             :inch => Unit.new("Inch", "in.", 25.4),
-             :kilometer => Unit.new("Kilometer", "km.", 1000000.0),
-             :meter => Unit.new("Meter", "m.", 1000.0),
-             :centimeter => Unit.new("Centimeter", "cm.", 10.0),
-             :millimeter => Unit.new("Millimeter", "mm.", 1.0)}
+    UNITS = [Unit.new(:mile_nautical, "Mile (nautical)", "mln.", 1852000.0),
+             Unit.new(:mile, "Mile", "ml.", 1609344.0),
+             Unit.new(:yard, "Yard", "yrd.", 914.4),
+             Unit.new(:foot, "Foot", "ft.", 304.8),
+             Unit.new(:inch, "Inch", "in.", 25.4),
+             Unit.new(:kilometer, "Kilometer", "km.", 1000000.0),
+             Unit.new(:meter, "Meter", "m.", 1000.0),
+             Unit.new(:centimeter, "Centimeter", "cm.", 10.0),
+             Unit.new(:millimeter, "Millimeter", "mm.", 1.0)]
 
     attr_reader :amount, :unit
     delegate :to_f, :to => :amount
@@ -49,8 +50,12 @@ module GeneralUnits
       end
     end
 
-    def to_s(round = 2)
-      "#{to_f.round(round)} #{unit.short}"
+    def to_s(round = nil)
+      "#{to_f.round(round||2)}"
+    end
+    
+    def formatted(round = nil)
+      "#{to_s(round)} #{unit.short}"
     end
 
     def to_length
@@ -61,10 +66,8 @@ module GeneralUnits
 
     def valid_unit?(unit)
       unit_object = case unit
-      when String then UNITS[unit.to_sym]
-      when Symbol then UNITS[unit]
+      when String, Symbol then UNITS.find {|u| u.code.to_s == unit.to_s}
       when Unit then unit
-      else UNITS[unit.to_s.to_sym]
       end
       unit_object || raise(TypeError, "Unprocessable unit #{unit.inspect}")
     end

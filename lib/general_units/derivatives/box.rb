@@ -8,6 +8,8 @@ module GeneralUnits
   
     attr_reader *VALUES, :unit
   
+    delegate :to_f, :to => :amount
+  
     def initialize(length = 0, width = 0, height = 0, unit)
       VALUES.each {|v| instance_variable_set(:"@#{v}", validate_value(eval(v), unit))}
       @unit = @height.unit
@@ -25,8 +27,12 @@ module GeneralUnits
       Box.new(*values.map {|v| v.convert_to(unit).amount}, unit)
     end
 
-    def to_s(round = 2)
-      "#{values.map(&:to_f).map {|f| f.round(round)}.join("x")} #{unit.short}"
+    def to_s(round = nil)
+      values.map {|d| d.to_s(round)}.join("x")
+    end
+    
+    def formatted(round = nil)
+      "#{to_s(round)} #{unit.short}"
     end
     
     def accommodates?(*boxes)

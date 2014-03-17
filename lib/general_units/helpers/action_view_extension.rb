@@ -7,11 +7,11 @@ module GeneralUnits
     end
     
     def weight_units_for_select
-      Weight::UNITS.map {|k,v| [v, k]}
+      Weight::UNITS.map {|u| [u.name, u.code]}
     end
     
     def length_units_for_select
-      Length::UNITS.map {|k,v| [v, k]}
+      Length::UNITS.map {|u| [u.name, u.code]}
     end
     
   end
