@@ -70,7 +70,7 @@ module GeneralUnits
       self == other_object
     end
 
-    def <=>(val)
+    def <=>(other_object)
       other_object = validate_capacity_or_length(other_object)
       amount <=> case other_object
       when Length then other_object
