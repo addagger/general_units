@@ -9,10 +9,15 @@ module GeneralUnits
     attr_reader *VALUES, :unit
   
     delegate :to_f, :to => :amount
+    delegate :hash, :to => :attributes
   
     def initialize(length = 0, width = 0, height = 0, unit)
       VALUES.each {|v| instance_variable_set(:"@#{v}", validate_value(eval(v), unit))}
       @unit = @height.unit
+    end
+  
+    def attributes
+      {:length => length, :width => width, :height => height, :unit => unit}
     end
   
     def values

@@ -35,12 +35,17 @@ module GeneralUnits
 
     attr_reader :amount, :unit
     delegate :to_f, :to => :amount
+    delegate :hash, :to => :attributes
     
     def initialize(amount = 0, unit)
       if unit = valid_unit?(unit)
         @amount = amount.try(:to_d)||0.to_d
         @unit = unit
       end
+    end
+    
+    def attributes
+      {:amount => amount, :unit => unit}
     end
 
     def convert_to(unit)
