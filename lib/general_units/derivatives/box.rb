@@ -64,6 +64,8 @@ module GeneralUnits
     def ==(other_object)
       other_object = validate_capacity(other_object)
       length == other_object.length && width == other_object.width && height == other_object.height
+    rescue
+      false
     end
 
     def eql?(other_object)
