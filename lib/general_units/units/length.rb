@@ -56,7 +56,7 @@ module GeneralUnits
     end
 
     def to_s(round = nil)
-      "#{to_f.round(round||2)}"
+      "#{to_f.divmod(1).last == 0 ? to_f.round(0) : to_f.round(round||2)}"
     end
     
     def formatted(round = nil)

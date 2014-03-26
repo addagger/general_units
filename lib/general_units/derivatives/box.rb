@@ -8,7 +8,7 @@ module GeneralUnits
   
     attr_reader *VALUES, :unit
   
-    delegate :to_f, :to => :amount
+    delegate :to_f, :to => :volume
     delegate :hash, :to => :attributes
   
     def initialize(length = 0, width = 0, height = 0, unit)
@@ -23,9 +23,17 @@ module GeneralUnits
     def values
       VALUES.map {|v| self.send(v)}
     end
-  
+    
     def amount
+      values.sum
+    end
+  
+    def volume
       length * width * height
+    end
+    
+    def has_space?
+      length > 0 && width > 0 && height > 0
     end
   
     def convert_to(unit)
@@ -42,7 +50,7 @@ module GeneralUnits
     
     def accommodates?(*boxes)
       boxes.map! {|box| validate_capacity(box)}
-      boxes.sum(&:amount) < amount && includes?(Box.new(boxes.map(&:length).max, boxes.map(&:width).max, boxes.map(&:height).max, unit))
+      boxes.sum(&:volume) < volume && includes?(Box.new(boxes.map(&:length).max, boxes.map(&:width).max, boxes.map(&:height).max, unit))
     end
   
     def same_size?(other_object)
@@ -74,45 +82,45 @@ module GeneralUnits
 
     def <=>(other_object)
       other_object = validate_capacity_or_length(other_object)
-      amount <=> case other_object
+      volume <=> case other_object
       when Length then other_object
-      when Box then other_object.amount
+      when Box then other_object.volume
       end
     end
 
     def >(other_object)
       other_object = validate_capacity_or_length(other_object)
-      amount > case other_object
+      volume > case other_object
       when Length then other_object
-      when Box then other_object.amount
+      when Box then other_object.volume
       end
     end
  
     def <(other_object)
       other_object = validate_capacity_or_length(other_object)
-      amount < case other_object
+      volume < case other_object
       when Length then other_object
-      when Box then other_object.amount
+      when Box then other_object.volume
       end
     end
   
     def >=(other_object)
       other_object = validate_capacity_or_length(other_object)
-      amount >= case other_object
+      volume >= case other_object
       when Length then other_object
-      when Box then other_object.amount
+      when Box then other_object.volume
       end
     end
  
     def <=(other_object)
       other_object = validate_capacity_or_length(other_object)
-      amount <= case other_object
+      volume <= case other_object
       when Length then other_object
-      when Box then other_object.amount
+      when Box then other_object.volume
       end
     end
 
-    delegate :positive?, :negative?, :to => :amount
+    delegate :positive?, :negative?, :to => :volume
   
     def +(other_object)
       other_object = validate_capacity_or_length(other_object)
@@ -146,7 +154,7 @@ module GeneralUnits
       end
     end
   
-    delegate :div, :divmod, :modulo, :%, :remainder, :abs, :zero?, :nonzero?, :coerce, :to => :amount
+    delegate :div, :divmod, :modulo, :%, :remainder, :abs, :zero?, :nonzero?, :coerce, :to => :volume
   
     ### ARITHMETICS END ###
   
