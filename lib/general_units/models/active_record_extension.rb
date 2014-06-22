@@ -1,7 +1,7 @@
 module GeneralUnits
 
   module ActiveRecordExtension
-    extend ActiveSupport::Concern
+    extend ::ActiveSupport::Concern
   
     module ClassMethods
       
@@ -17,12 +17,12 @@ module GeneralUnits
         self._has_weight[prefix][:default_unit] = default_unit = options[:default_unit]||:kilogram
         self._has_weight[prefix][:default_unit_method] = default_unit_method = options[:default_unit_method]||:"deafult_#{prefix}_unit"
         
-  			validates_inclusion_of unit_field, :in => Weight::UNITS.map {|u| u.code.to_s}, :if => Proc.new {|o| o.send(amount_field).present?}
+        validates_inclusion_of unit_field, :in => Weight.units.map {|u| u.code.to_s}, :if => Proc.new {|o| o.send(amount_field).present?}
         
         class_eval <<-EOV
         
           def #{unit_field}=(value)
-            if value.to_sym.in?(GeneralUnits::Weight::UNITS.map(&:code))
+            if value.to_sym.in?(GeneralUnits::Weight.units.map(&:code))
               super(value.to_s) 
             else
               raise ArgumentError, "Unprocessable unit: \#{value.inspect\}"
@@ -77,12 +77,12 @@ module GeneralUnits
         self._has_length[prefix][:default_unit] = default_unit = options[:default_unit]||:centimeter
         self._has_length[prefix][:default_unit_method] = default_unit_method = options[:default_unit_method]||:"deafult_#{prefix}_unit"
         
-  			validates_inclusion_of unit_field, :in => Length::UNITS.map {|u| u.code.to_s}, :if => Proc.new {|o| o.send(amount_field).present?}
+        validates_inclusion_of unit_field, :in => Length.units.map {|u| u.code.to_s}, :if => Proc.new {|o| o.send(amount_field).present?}
         
         class_eval <<-EOV
         
           def #{unit_field}=(value)
-            if value.to_sym.in?(GeneralUnits::Length::UNITS.map(&:code))
+            if value.to_sym.in?(GeneralUnits::Length.units.map(&:code))
               super(value.to_s) 
             else
               raise ArgumentError, "Unprocessable unit: \#{value.inspect\}"
@@ -140,12 +140,12 @@ module GeneralUnits
         self._has_box[prefix][:default_unit] = default_unit = options[:default_unit]||:centimeter
         self._has_box[prefix][:default_unit_method] = default_unit_method = options[:default_unit_method]||:"deafult_#{prefix}_unit"
         
-  			validates_inclusion_of unit_field, :in => Length::UNITS.map {|u| u.code.to_s}, :if => Proc.new {|o| o.send(length_field).present? || o.send(width_field).present? || o.send(height_field).present?}
+        validates_inclusion_of unit_field, :in => Length.units.map {|u| u.code.to_s}, :if => Proc.new {|o| o.send(length_field).present? || o.send(width_field).present? || o.send(height_field).present?}
         
         class_eval <<-EOV
         
           def #{unit_field}=(value)
-            if value.to_sym.in?(GeneralUnits::Length::UNITS.map(&:code))
+            if value.to_sym.in?(GeneralUnits::Length.units.map(&:code))
               super(value.to_s) 
             else
               raise ArgumentError, "Unprocessable unit: \#{value.inspect\}"
