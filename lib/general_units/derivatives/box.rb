@@ -34,7 +34,7 @@ module GeneralUnits
     end
     
     def has_space?
-      length > 0 && width > 0 && height > 0
+      le  > 0 && width > 0 && height > 0
     end
   
     def convert_to(unit)
