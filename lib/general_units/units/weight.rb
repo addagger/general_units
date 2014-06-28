@@ -1,10 +1,5 @@
-require 'general_units/units/base/measurement'
-require 'general_units/units/base/unit'
-require 'general_units/units/arithmetics/methods'
-
 module GeneralUnits
   class Weight < ::GeneralUnits::Base::Measurement
-    ::GeneralUnits::Arithmetics.extend_class(self)
     
     class Unit < ::GeneralUnits::Base::Unit
       alias :grams :fractional
