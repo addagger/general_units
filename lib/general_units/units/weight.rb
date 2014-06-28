@@ -20,9 +20,6 @@ module GeneralUnits
         Weight.new(convert_amount, unit)
       end
     end
-
-    def to_weight
-      self
-    end
+    
   end
 end

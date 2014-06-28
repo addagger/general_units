@@ -11,13 +11,9 @@ module GeneralUnits
 
     def convert_to(unit)
       if convert_unit = valid_unit?(unit)
-     convert_amount = amount * @unit.cubic_millimeters/convert_unit.cubic_millimeters
+        convert_amount = amount * @unit.cubic_millimeters/convert_unit.cubic_millimeters
         Volume.new(convert_amount, unit)
       end
-    end
-    
-    def to_volume
-      self
     end
 
   end

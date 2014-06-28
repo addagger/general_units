@@ -21,13 +21,10 @@ module GeneralUnits
         Length.new(convert_amount, unit)
       end
     end
-
-    def to_length
-      self
-    end
     
-    def to_volume
-      GeneralUnits::Volume.new(amount, :"cubic_#{unit.code}")
+    def to_volume(unit_code)
+      volume = GeneralUnits::Volume.new(amount, :"cubic_#{unit.code}")
+      unit_code ? volume.convert_to(unit_code) : volume
     end
 
   end

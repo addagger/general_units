@@ -53,6 +53,10 @@ module GeneralUnits
       end
     end
     
+    def to_volume
+      volume
+    end
+    
     def two_max_values
       sorted = values.sort.reverse
       sorted.first(2)
@@ -147,6 +151,8 @@ module GeneralUnits
     end
     
     def concat_with(other_box, &block)
+      #other_box = other_box.convert_to(unit)
+      
       length_1, width_1, height_1 = *values.sort.reverse
       length_2, width_2, height_2 = *other_box.values.sort.reverse
 
@@ -161,19 +167,21 @@ module GeneralUnits
       if x1 > 0
         y1 = width
         z1 = length_1 > length_2 ? height_2 : height_1
-        yield Box.new(x1, y1, z1)
+        yield(Box.new(x1, y1, z1).convert_to(unit)) if block_given?
       end
 
       if x2 > 0
         y2 = ((length_1 > length_2) && (width_1 > width_2)) ? length-x1 : length
         z2 = width_1 > width_2 ? height_2 : height_1
-        yield Box.new(x2, y2, z2)
+        yield(Box.new(x2, y2, z2).convert_to(unit)) if block_given?
       end
       
-      Box.new(length, width, height)
+      Box.new(length, width, height).convert_to(unit)
     end
 
     def estimated_spaces_with(other_box, &block)
+      #other_box = other_box.convert_to(unit)
+      
       if includes?(other_box)
         length_1, width_1, height_1 = *values.sort.reverse
         length_2, width_2, height_2 = *other_box.values.sort.reverse
@@ -182,23 +190,23 @@ module GeneralUnits
         
         x1 = (length_1 - length_2).abs
         if x1 > 0
-          space1 = Box.new(x1, width_1, height_1)
+          space1 = Box.new(x1, width_1, height_1).convert_to(unit)
           estimated_spaces << space1
-          yield space1
+          yield(space1) if block_given?
         end
   
         x2 = (width_1 - width_2).abs
         if x2 > 0
-          space2 = Box.new(length_1 - x1, x2, height_1)
+          space2 = Box.new(length_1 - x1, x2, height_1).convert_to(unit)
           estimated_spaces << space2
-          yield space2
+          yield(space2) if block_given?
         end
   
         x3 = (height_1 - height_2).abs
         if x3 > 0
-          space3 = Box.new(length_2, width_2, x3)
+          space3 = Box.new(length_2, width_2, x3).convert_to(unit)
           estimated_spaces << space3
-          yield space3
+          yield(space3) if block_given?
         end
         
         estimated_spaces

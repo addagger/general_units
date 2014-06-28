@@ -45,8 +45,7 @@ module GeneralUnits
       end
 
       def ==(other_object)
-        other_object = other_object.send(:"to_#{measurement}") unless other_object.is_a?(self.class)
-        amount == other_object.convert_to(unit).amount
+        amount == valid_amount(other_object)
       rescue NoMethodError
         false
       end
@@ -55,68 +54,50 @@ module GeneralUnits
         self == other_object
       end
 
-      def <=>(val)
-        val = val.send(:"to_#{measurement}")
-        unless amount == 0 || val.amount == 0 || unit == val.unit
-          val = val.convert_to(unit)
-        end
-        amount <=> val.amount
+      def <=>(other_object)
+        amount <=> valid_amount(other_object)
       rescue NoMethodError
         raise ArgumentError, "Comparison of #{self.class} with #{val.inspect} failed"
       end
       
       def >(other_object)
-        other_object = other_object.is_a?(self.class) ? other_object.convert_to(unit) : other_object.send(:"to_#{measurement}")
-        amount > other_object.amount
+        amount > valid_amount(other_object)
       end
      
       def <(other_object)
-        other_object = other_object.is_a?(self.class) ? other_object.convert_to(unit) : other_object.send(:"to_#{measurement}")
-        amount < other_object.amount
+        amount < valid_amount(other_object)
       end
       
       def >=(other_object)
-        other_object = other_object.is_a?(self.class) ? other_object.convert_to(unit) : other_object.send(:"to_#{measurement}")
-        amount >= other_object.amount
+        amount >= valid_amount(other_object)
       end
      
       def <=(other_object)
-        other_object = other_object.is_a?(self.class) ? other_object.convert_to(unit) : other_object.send(:"to_#{measurement}")
-        amount <= other_object.amount
+        amount <= valid_amount(other_object)
       end
     
       def positive?
-        amount > 0
+        self > 0
       end
 
       def negative?
-        amount < 0
+        self < 0
       end
 
       def +(other_object)
-        other_object = other_object.is_a?(self.class) ? other_object.convert_to(unit) : other_object.send(:"to_#{measurement}")
-        self.class.new(amount + other_object.amount, unit)
+        self.class.new(amount + valid_amount(other_object), unit)
       end
 
       def -(other_object)
-        other_object = other_object.is_a?(self.class) ? other_object.convert_to(unit) : other_object.send(:"to_#{measurement}")
-        self.class.new(amount - other_object.amount, unit)
+        self.class.new(amount - valid_amount(other_object), unit)
       end
 
-      def *(value)
-        case value
-        when Numeric then self.class.new(amount * value, unit)
-        when self.class then self.class.new(amount * value.convert_to(unit).amount, unit)
-        else raise ArgumentError, "Can't multiply a #{self.class} by a #{value.class.name}'s value"
-        end
+      def *(other_object)
+        self.class.new(amount * valid_amount(other_object), unit)
       end
 
-      def /(value)
-        case value
-        when Numeric then self.class.new(amount / value, unit)
-        when self.class then self.class.new(amount / value.convert_to(unit).amount, unit)
-        else raise ArgumentError, "Can't divide a #{self.class} by a #{value.class.name}'s value"
-        end
+      def /(other_object)
+        self.class.new(amount / valid_amount(other_object), unit)
       end
 
       def div(value)
@@ -139,7 +120,7 @@ module GeneralUnits
       private :divmod_object
 
       def divmod_other(val)
-        quotient, remainder = amount.divmod(val.send(:"to_#{measurement}", unit).amount)
+        quotient, remainder = amount.divmod(valid_amount(other_object))
         [self.class.new(quotient, unit), self.class.new(remainder, unit)]
       end
       private :divmod_other
@@ -182,6 +163,14 @@ module GeneralUnits
       ### ARITHMETICS END ###
       
       private
+
+      def valid_amount(other_object)
+        case other_object
+        when self.class then other_object.convert_to(unit).amount
+        when Numeric then other_object
+        else other_object.send(:"to_#{measurement}").convert_to(unit).amount
+        end
+      end
 
       def valid_unit?(unit)
         unit_object = case unit
