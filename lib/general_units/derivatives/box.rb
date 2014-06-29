@@ -12,9 +12,11 @@ module GeneralUnits
     delegate :to_f, :to => :volume
     delegate :hash, :to => :attributes
   
-    def initialize(length = 0, width = 0, height = 0, unit = nil)
-      VALUES.each {|v| instance_variable_set(:"@#{v}", validate_dimension_value(eval(v), unit))}
-      @unit = unit||@height.unit.code
+    def initialize(length = 0, width = 0, height = 0, unit)
+      if unit = valid_unit(unit)
+        VALUES.each {|v| instance_variable_set(:"@#{v}", validate_dimension_value(eval(v), unit))}
+        @unit = unit
+      end
     end
   
     def attributes
@@ -30,11 +32,11 @@ module GeneralUnits
     end
   
     def volume
-      Volume.new(length * width * height, :"cubic_#{unit}")
+      Volume.new(length * width * height, :"cubic_#{unit.code}")
     end
     
     def has_space?
-      le  > 0 && width > 0 && height > 0
+      length > 0 && width > 0 && height > 0
     end
   
     def convert_to(unit)
@@ -167,16 +169,16 @@ module GeneralUnits
       if x1 > 0
         y1 = width
         z1 = length_1 > length_2 ? height_2 : height_1
-        yield(Box.new(x1, y1, z1).convert_to(unit)) if block_given?
+        yield(Box.new(x1, y1, z1, unit)) if block_given?
       end
 
       if x2 > 0
         y2 = ((length_1 > length_2) && (width_1 > width_2)) ? length-x1 : length
         z2 = width_1 > width_2 ? height_2 : height_1
-        yield(Box.new(x2, y2, z2).convert_to(unit)) if block_given?
+        yield(Box.new(x2, y2, z2, unit)) if block_given?
       end
       
-      Box.new(length, width, height).convert_to(unit)
+      Box.new(length, width, height, unit).convert_to(unit)
     end
 
     def estimated_spaces_with(other_box, &block)
@@ -190,21 +192,21 @@ module GeneralUnits
         
         x1 = (length_1 - length_2).abs
         if x1 > 0
-          space1 = Box.new(x1, width_1, height_1).convert_to(unit)
+          space1 = Box.new(x1, width_1, height_1, unit)
           estimated_spaces << space1
           yield(space1) if block_given?
         end
   
         x2 = (width_1 - width_2).abs
         if x2 > 0
-          space2 = Box.new(length_1 - x1, x2, height_1).convert_to(unit)
+          space2 = Box.new(length_1 - x1, x2, height_1, unit)
           estimated_spaces << space2
           yield(space2) if block_given?
         end
   
         x3 = (height_1 - height_2).abs
         if x3 > 0
-          space3 = Box.new(length_2, width_2, x3).convert_to(unit)
+          space3 = Box.new(length_2, width_2, x3, unit)
           estimated_spaces << space3
           yield(space3) if block_given?
         end
@@ -214,9 +216,16 @@ module GeneralUnits
     end
   
     private
+    
+    def valid_unit(unit)
+      unit_object = case unit
+      when String, Symbol then Length.units.find {|u| u.code.to_s == unit.to_s}
+      when Base::Unit then unit
+      end
+      unit_object || raise(TypeError, "Unprocessable unit #{unit.inspect}")
+    end
   
-    def validate_dimension_value(val, unit = nil)
-      unit ||= :centimeter
+    def validate_dimension_value(val, unit)
       val.is_a?(Length) ? val.convert_to(unit) : Length.new(val, unit)
     end
   
