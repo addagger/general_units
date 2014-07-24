@@ -3,14 +3,12 @@ module GeneralUnits
     class Unit
       METRIC_SYSTEMS = [:metric, :english, :american]
     
-      attr_reader :owner_class, :code, :name, :short, :fractional, :system
+      attr_reader :owner_class, :code, :fractional, :system
       delegate :i18n_key, :to => :owner_class
 
-      def initialize(owner_class, code, name, short, fractional, system = :metric)
+      def initialize(owner_class, code, fractional, system = :metric)
         @owner_class = owner_class
         @code = code
-        @name = name.to_s
-        @short = short.to_s
         @fractional = fractional.to_d
         @system = system.to_sym
         METRIC_SYSTEMS.each do |s|

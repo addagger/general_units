@@ -7,19 +7,19 @@ module GeneralUnits
     end
 
     def weight_units_for_select
-      Weight.units.map {|u| [u.name, u.code]}
+      Weight.units.map {|u| [u.to_s, u.code]}
     end
         
     def short_weight_units_for_select
-      Weight.units.map {|u| [u.short, u.code]}
+      Weight.units.map {|u| [u.to_s(:format => :short), u.code]}
     end
 
     def length_units_for_select
-      Length.units.map {|u| [u.name, u.code]}
+      Length.units.map {|u| [u.to_s, u.code]}
     end
         
     def short_length_units_for_select
-      Length.units.map {|u| [u.short, u.code]}
+      Length.units.map {|u| [u.to_s(:format => :short), u.code]}
     end
     
   end
