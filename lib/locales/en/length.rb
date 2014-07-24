@@ -1,7 +1,7 @@
 {
   :en => {
     :general_units => {
-      :weight => {
+      :length => {
         :formats => {
           :long => {
             :mile_nautical => {:zero => "Mile (nautical)", :one => "Mile (nautical)", :two => "Mile (nautical)", :few => "Mile (nautical)", :many => "Mile (nautical)", :other => "Mile (nautical)"},

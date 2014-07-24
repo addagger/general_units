@@ -1,7 +1,7 @@
 {
   :ru => {
     :general_units => {
-      :weight => {
+      :volume => {
         :formats => {
           :long => {
             :cubic_mile_nautical => {:zero => "Cubic Mile (nautical)", :one => "Cubic Mile (nautical)", :two => "Cubic Mile (nautical)", :few => "Cubic Mile (nautical)", :many => "Cubic Mile (nautical)", :other => "Cubic Mile (nautical)"},
