@@ -4,15 +4,15 @@
       :volume => {
         :formats => {
           :long => {
-            :cubic_mile_nautical => {:zero => "Cubic Mile (nautical)", :one => "Cubic Mile (nautical)", :two => "Cubic Mile (nautical)", :few => "Cubic Mile (nautical)", :many => "Cubic Mile (nautical)", :other => "Cubic Mile (nautical)"},
-            :cubic_mile => {:zero => "Cubic Mile", :one => "Cubic Mile", :two => "Cubic Mile", :few => "Cubic Mile", :many => "Cubic Mile", :other => "Cubic Mile"},
-            :cubic_yard => {:zero => "Cubic Yard", :one => "Cubic Yard", :two => "Cubic Yard", :few => "Cubic Yard", :many => "Cubic Yard", :other => "Cubic Yard"},
-            :cubic_foot => {:zero => "Cubic Foot", :one => "Cubic Foot", :two => "Cubic Foot", :few => "Cubic Foot", :many => "Cubic Foot", :other => "Cubic Foot"},
-            :cubic_inch => {:zero => "Cubic Inch", :one => "Cubic Inch", :two => "Cubic Inch", :few => "Cubic Inch", :many => "Cubic Inch", :other => "Cubic Inch"},
-            :cubic_kilometer => {:zero => "Cubic Kilometer", :one => "Cubic Kilometer", :two => "Cubic Kilometer", :few => "Cubic Kilometer", :many => "Cubic Kilometer", :other => "Cubic Kilometer"},
-            :cubic_meter => {:zero => "Cubic Meter", :one => "Cubic Meter", :two => "Cubic Meter", :few => "Cubic Meter", :many => "Cubic Meter", :other => "Cubic Meter"},
-            :cubic_centimeter => {:zero => "Cubic Centimeter", :one => "Cubic Centimeter", :two => "Cubic Centimeter", :few => "Cubic Centimeter", :many => "Cubic Centimeter", :other => "Cubic Centimeter"},
-            :cubic_millimeter => {:zero => "Cubic Millimeter", :one => "Cubic Millimeter", :two => "Cubic Millimeter", :few => "Cubic Millimeter", :many => "Cubic Millimeter", :other => "Cubic Millimeter"}
+            :cubic_mile_nautical => {:zero => "cubic miles (nautical)", :one => "cubic mile (nautical)", :two => "cubic miles (nautical)", :few => "cubic miles (nautical)", :many => "cubic miles (nautical)", :other => "cubic miles (nautical)"},
+            :cubic_mile => {:zero => "cubic miles", :one => "cubic mile", :two => "cubic miles", :few => "cubic miles", :many => "cubic miles", :other => "cubic miles"},
+            :cubic_yard => {:zero => "cubic yards", :one => "cubic yard", :two => "cubic yards", :few => "cubic yards", :many => "cubic yards", :other => "cubic yards"},
+            :cubic_foot => {:zero => "cubic feet", :one => "cubic foot", :two => "cubic feet", :few => "cubic feet", :many => "cubic feet", :other => "cubic feet"},
+            :cubic_inch => {:zero => "cubic inches", :one => "cubic inch", :two => "cubic inches", :few => "cubic inches", :many => "cubic inches", :other => "cubic inches"},
+            :cubic_kilometer => {:zero => "cubic kilometers", :one => "cubic kilometer", :two => "cubic kilometers", :few => "cubic kilometers", :many => "cubic kilometers", :other => "cubic kilometers"},
+            :cubic_meter => {:zero => "cubic meters", :one => "cubic meter", :two => "cubic meters", :few => "cubic meters", :many => "cubic meters", :other => "cubic meters"},
+            :cubic_centimeter => {:zero => "cubic centimeters", :one => "cubic centimeter", :two => "cubic centimeters", :few => "cubic centimeters", :many => "cubic centimeters", :other => "cubic centimeters"},
+            :cubic_millimeter => {:zero => "cubic millimeters", :one => "cubic millimeter", :two => "cubic millimeters", :few => "cubic millimeters", :many => "cubic millimeters", :other => "cubic millimeters"}
           },
           :short => {
             :cubic_mile_nautical=> {:zero => "mln<sup>3</sup>", :one => "mln<sup>3</sup>", :two => "mln<sup>3</sup>", :few => "mln<sup>3</sup>", :many => "mln<sup>3</sup>", :other => "mln<sup>3</sup>"},

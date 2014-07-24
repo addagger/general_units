@@ -28,7 +28,7 @@ module GeneralUnits
       def self.i18n_key(*args)
         key = args.first
         options = args.extract_options!
-        options[:locale] ||= :en
+        options[:locale] ||= I18n.locale
         begin
           I18n.t("#{i18n_format_key(options[:format])}.#{key}", options.merge(:raise => true))
         rescue

@@ -4,15 +4,15 @@
       :length => {
         :formats => {
           :long => {
-            :mile_nautical => {:zero => "Mile (nautical)", :one => "Mile (nautical)", :two => "Mile (nautical)", :few => "Mile (nautical)", :many => "Mile (nautical)", :other => "Mile (nautical)"},
-            :mile => {:zero => "Mile", :one => "Mile", :two => "Mile", :few => "Mile", :many => "Mile", :other => "Mile"},
-            :yard => {:zero => "Yard", :one => "Yard", :two => "Yard", :few => "Yard", :many => "Yard", :other => "Yard"},
-            :foot => {:zero => "Foot", :one => "Foot", :two => "Foot", :few => "Foot", :many => "Foot", :other => "Foot"},
-            :inch => {:zero => "Inch", :one => "Inch", :two => "Inch", :few => "Inch", :many => "Inch", :other => "Inch"},
-            :kilometer => {:zero => "Kilometer", :one => "Kilometer", :two => "Kilometer", :few => "Kilometer", :many => "Kilometer", :other => "Kilometer"},
-            :meter => {:zero => "Meter", :one => "Meter", :two => "Meter", :few => "Meter", :many => "Meter", :other => "Meter"},
-            :centimeter => {:zero => "Centimeter", :one => "Centimeter", :two => "Centimeter", :few => "Centimeter", :many => "Centimeter", :other => "Centimeter"},
-            :millimeter => {:zero => "Millimeter", :one => "Millimeter", :two => "Millimeter", :few => "Millimeter", :many => "Millimeter", :other => "Millimeter"}
+            :mile_nautical => {:zero => "miles (nautical)", :one => "mile (nautical)", :two => "miles (nautical)", :few => "miles (nautical)", :many => "miles (nautical)", :other => "miles (nautical)"},
+            :mile => {:zero => "miles", :one => "mile", :two => "miles", :few => "miles", :many => "miles", :other => "miles"},
+            :yard => {:zero => "yards", :one => "yard", :two => "yards", :few => "yards", :many => "yards", :other => "yards"},
+            :foot => {:zero => "feet", :one => "foot", :two => "feet", :few => "feet", :many => "feet", :other => "feet"},
+            :inch => {:zero => "inches", :one => "inch", :two => "inches", :few => "inches", :many => "inches", :other => "inches"},
+            :kilometer => {:zero => "kilometers", :one => "kilometer", :two => "kilometers", :few => "kilometers", :many => "kilometers", :other => "kilometers"},
+            :meter => {:zero => "meters", :one => "meter", :two => "meters", :few => "meters", :many => "meters", :other => "meters"},
+            :centimeter => {:zero => "centimeters", :one => "centimeter", :two => "centimeters", :few => "centimeters", :many => "centimeters", :other => "centimeters"},
+            :millimeter => {:zero => "millimeters", :one => "millimeter", :two => "millimeters", :few => "millimeters", :many => "millimeters", :other => "millimeters"}
           },
           :short => {
             :mile_nautical=> {:zero => "mln", :one => "mln", :two => "mln", :few => "mln", :many => "mln", :other => "mln"},

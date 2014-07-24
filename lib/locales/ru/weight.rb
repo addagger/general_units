@@ -4,24 +4,24 @@
       :weight => {
         :formats => {
           :long => {
-            :short_ton_us => {:zero => "Short ton (US)", :one => "Short ton (US)", :two => "Short ton (US)", :few => "Short ton (US)", :many => "Short ton (US)", :other => "Short ton (US)"},
-            :pound_us => {:zero => "Pound (US)", :one => "Pound (US)", :two => "Pound (US)", :few => "Pound (US)", :many => "Pound (US)", :other => "Pound (US)"},
-            :ounce_us => {:zero => "Ounce (US)", :one => "Ounce (US)", :two => "Ounce (US)", :few => "Ounce (US)", :many => "Ounce (US)", :other => "Ounce (US)"},
-            :stone => {:zero => "Stone", :one => "Stone", :two => "Stone", :few => "Stone", :many => "Stone", :other => "Stone"},
-            :long_ton_uk => {:zero => "Long Ton (UK)", :one => "Long Ton (UK)", :two => "Long Ton (UK)", :few => "Long Ton (UK)", :many => "Long Ton (UK)", :other => "Long Ton (UK)"},
-            :metric_ton => {:zero => "Metric Ton", :one => "Metric Ton", :two => "Metric Ton", :few => "Metric Ton", :many => "Metric Ton", :other => "Metric Ton"},
-            :kilogram => {:zero => "Kilogram", :one => "Kilogram", :two => "Kilogram", :few => "Kilogram", :many => "Kilogram", :other => "Kilogram"},
-            :gram => {:zero => "Gram", :one => "Gram", :two => "Gram", :few => "Gram", :many => "Gram", :other => "Gram"}
+            :short_ton_us => {:zero => "ам.тонн", :one => "ам.тонна", :two => "ам.тонны", :few => "ам.тонны", :many => "ам.тонн", :other => "ам.тонн"},
+            :pound_us => {:zero => "фунтов", :one => "фунт", :two => "фунта", :few => "фунта", :many => "фунтов", :other => "фунтов"},
+            :ounce_us => {:zero => "унций", :one => "унция", :two => "унции", :few => "унций", :many => "унций", :other => "унций"},
+            :stone => {:zero => "стоунов", :one => "стоун", :two => "стоуна", :few => "стоуна", :many => "стоунов", :other => "стоунов"},
+            :long_ton_uk => {:zero => "англ.тонн", :one => "англ.тонна", :two => "англ.тонны", :few => "англ.тонны", :many => "англ.тонн", :other => "англ.тонн"},
+            :metric_ton => {:zero => "тонн", :one => "тонна", :two => "тонны", :few => "тонны", :many => "тонн", :other => "тонн"},
+            :kilogram => {:zero => "килограмм", :one => "килограмм", :two => "килограмма", :few => "килограмма", :many => "килограмм", :other => "килограмм"},
+            :gram => {:zero => "грамм", :one => "грамм", :two => "грамма", :few => "грамма", :many => "грамм", :other => "грамм"}
           },
           :short => {
-            :short_ton_us => {:zero => "Sht", :one => "Sht", :two => "Sht", :few => "Sht", :many => "Sht", :other => "Sht"},
-            :pound_us => {:zero => "Pnd", :one => "Pnd", :two => "Pnd", :few => "Pnd", :many => "Pnd", :other => "Pnd"},
-            :ounce_us => {:zero => "Ounce", :one => "Ounce", :two => "Ounce", :few => "Ounce", :many => "Ounce", :other => "Ounce"},
-            :stone => {:zero => "Stn", :one => "Stn", :two => "Stn", :few => "Stn", :many => "Stn", :other => "Stn"},
-            :long_ton_uk => {:zero => "Lngt", :one => "Lngt", :two => "Lngt", :few => "Lngt", :many => "Lngt", :other => "Lngt"},
-            :metric_ton => {:zero => "Ton", :one => "Ton", :two => "Ton", :few => "Ton", :many => "Ton", :other => "Ton"},
-            :kilogram => {:zero => "Kg", :one => "Kg", :two => "Kg", :few => "Kg", :many => "Kg", :other => "Kg"},
-            :gram => {:zero => "g.", :one => "g.", :two => "g.", :few => "g.", :many => "g.", :other => "g."}
+            :short_ton_us => {:zero => "ам.т", :one => "ам.т", :two => "ам.т", :few => "ам.т", :many => "ам.т", :other => "ам.т"},
+            :pound_us => {:zero => "фунт", :one => "фунт", :two => "фунт", :few => "фунт", :many => "фунт", :other => "фунт"},
+            :ounce_us => {:zero => "ун", :one => "ун", :two => "ун", :few => "ун", :many => "ун", :other => "ун"},
+            :stone => {:zero => "ст", :one => "ст", :two => "ст", :few => "ст", :many => "ст", :other => "ст"},
+            :long_ton_uk => {:zero => "англ.т", :one => "англ.т", :two => "англ.т", :few => "англ.т", :many => "англ.т", :other => "англ.т"},
+            :metric_ton => {:zero => "т", :one => "т", :two => "т", :few => "т", :many => "т", :other => "т"},
+            :kilogram => {:zero => "кг", :one => "кг", :two => "кг", :few => "кг", :many => "кг", :other => "кг"},
+            :gram => {:zero => "г", :one => "г", :two => "г", :few => "г", :many => "г", :other => "г"}
           }
         }
       }
