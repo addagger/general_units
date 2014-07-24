@@ -1,3 +1,4 @@
+require "i18n"
 require "general_units/version"
 
 module GeneralUnits
@@ -6,7 +7,7 @@ module GeneralUnits
     load_units!
     load_numeric!
     load_derivatives!
-    # load_locales!
+    load_locales!
     require 'general_units/engine'
     require 'general_units/railtie'
   end
@@ -31,9 +32,10 @@ module GeneralUnits
     require 'general_units/derivatives/box'
   end
   
-  # def load_locales!
-  #   Dir[File.join(File.dirname(__FILE__), "russian", "locale", "**/*")]
-  # end
+  def self.load_locales!
+    path = File.dirname(__FILE__)
+    I18n.load_path += Dir[ File.join(path, 'locales', '*.{rb,yml}') ]
+  end
 
 end
 
