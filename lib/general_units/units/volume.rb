@@ -6,7 +6,7 @@ module GeneralUnits
     end
 
     self.units = Length.units.map do |unit|
-                   Unit.new("cubic_#{unit.code}", "Cubic #{unit.name}", "#{unit.short}", unit.fractional**3, unit.system)
+                   Unit.new(self, :"cubic_#{unit.code}", unit.fractional**3, unit.system)
                  end
 
     def convert_to(unit)

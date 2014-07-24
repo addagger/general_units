@@ -13,24 +13,54 @@ module GeneralUnits
         end
       end
     
+      def self.i18n_scope_key
+        'general_units'
+      end
+    
+      def self.i18n_class_key
+        "#{i18n_scope_key}.#{name.demodulize.underscore}"
+      end
+      
+      def self.i18n_format_key(format = nil)
+        [i18n_class_key, :formats, format].compact.join(".")
+      end
+      
+      def self.i18n_key(*args)
+        key = args.first
+        options = args.extract_options!
+        options[:locale] ||= :en
+        begin
+          I18n.t("#{i18n_format_key(options[:format])}.#{key}", options.merge(:raise => true))
+        rescue
+          begin
+            I18n.t("#{i18n_class_key}.#{key}", options.merge(:raise => true))
+          rescue
+            I18n.t("#{i18n_scope_key}.#{key}", options)
+          end
+        end
+      end
+      
+      def i18n_delimeter(options = {})
+        self.class.i18n_key(:delimeter, options)
+      end
+    
       def attributes
         {:amount => amount, :unit => unit}
       end
 
-      def to_s(round = nil)
-        "#{to_f.divmod(1).last == 0 ? to_f.round(0) : to_f.round(round||2)}"
+      def to_s(*args)
+        options = args.extract_options!
+        value = "#{rounded(options[:round])}".gsub(".", i18n_delimeter(options))
+        unit_string = unit.to_s(options)
+        "#{value} #{unit_string}"
+      end
+      
+      def rounded(round = nil)
+        to_f.divmod(1).last == 0 ? to_f.round(0) : to_f.round(round||2)
       end
       
       def inspect
-        "<#{self.class.name} amount=#{amount} unit=#{unit}>"
-      end
-    
-      def formatted(round = nil, &block)
-        if block_given?
-          yield to_s(round), unit
-        else
-          "#{to_s(round)} #{unit.short}"          
-        end
+        "<#{self.class.name} amount=#{to_f} unit=#{unit.code}>"
       end
       
       ### ARITHMETICS START ###

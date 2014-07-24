@@ -43,16 +43,11 @@ module GeneralUnits
       Box.new(*values.map {|v| v.convert_to(unit).amount}, unit)
     end
 
-    def to_s(round = nil)
-      values.map {|d| d.to_s(round)}.join("x")
-    end
-    
-    def formatted(round = nil, &block)
-      if block_given?
-        yield to_s(round), unit
-      else
-        "#{to_s(round)} #{unit.short}"          
-      end
+    def to_s(*args)
+      options = args.extract_options!
+      value = values.map {|d| d.rounded(options[:round])}.join("x")
+      unit_string = unit.to_s(options)
+      "#{value} #{unit_string}"
     end
     
     def to_volume
