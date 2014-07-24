@@ -46,7 +46,7 @@ module GeneralUnits
     def to_s(*args)
       options = args.extract_options!
       value = values.map {|d| d.rounded(options[:round])}.join("x")
-      unit_string = unit.to_s(options.merge(:count => values.last.rounded))
+      unit_string = unit.to_s(options.merge(:count => values.last.rounded), :format => :short)
       "#{value} #{unit_string}"
     end
     

@@ -50,8 +50,8 @@ module GeneralUnits
 
       def to_s(*args)
         options = args.extract_options!
-        value = "#{rounded(options[:round])}".gsub(".", i18n_delimeter(options.merge(:count => rounded(options[:round]))))
-        unit_string = unit.to_s(options)
+        value = "#{rounded(options[:round])}".gsub(".", i18n_delimeter(options))
+        unit_string = unit.to_s(options.merge(:count => rounded(options[:round]), :format => :short))
         "#{value} #{unit_string}"
       end
       
