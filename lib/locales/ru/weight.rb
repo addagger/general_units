@@ -15,7 +15,7 @@
           },
           :short => {
             :short_ton_us => {:zero => "ам.т", :one => "ам.т", :two => "ам.т", :few => "ам.т", :many => "ам.т", :other => "ам.т"},
-            :pound_us => {:zero => "фунт", :one => "фунт", :two => "фунт", :few => "фунт", :many => "фунт", :other => "фунт"},
+            :pound_us => {:zero => "фунтов", :one => "фунт", :two => "фунта", :few => "фунта", :many => "фунтов", :other => "фунтов"},
             :ounce_us => {:zero => "ун", :one => "ун", :two => "ун", :few => "ун", :many => "ун", :other => "ун"},
             :stone => {:zero => "ст", :one => "ст", :two => "ст", :few => "ст", :many => "ст", :other => "ст"},
             :long_ton_uk => {:zero => "англ.т", :one => "англ.т", :two => "англ.т", :few => "англ.т", :many => "англ.т", :other => "англ.т"},

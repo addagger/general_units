@@ -15,10 +15,10 @@
             :millimeter => {:zero => "миллиметров", :one => "миллиметр", :two => "миллиметра", :few => "миллиметра", :many => "миллиметров", :other => "миллиметров"}
           },
           :short => {
-            :mile_nautical=> {:zero => "м.мл", :one => "м.мл", :two => "м.мл", :few => "м.мл", :many => "м.мл", :other => "м.мл"},
-            :mile => {:zero => "мл", :one => "мл", :two => "мл", :few => "мл", :many => "мл", :other => "мл"},
-            :yard => {:zero => "ярд", :one => "ярд", :two => "ярд", :few => "ярд", :many => "ярд", :other => "ярд"},
-            :foot => {:zero => "фут", :one => "фут", :two => "фут", :few => "фут", :many => "фут", :other => "фут"},
+            :mile_nautical => {:zero => "м.миль", :one => "м.миля", :two => "м.мили", :few => "м.мили", :many => "м.миль", :other => "м.миль"},
+            :mile => {:zero => "миль", :one => "миля", :two => "мили", :few => "мили", :many => "миль", :other => "миль"},
+            :yard => {:zero => "ярдов", :one => "ярд", :two => "ярда", :few => "ярда", :many => "ярдов", :other => "ярдов"},
+            :foot => {:zero => "футов", :one => "фут", :two => "фута", :few => "футов", :many => "футов", :other => "футов"},
             :inch => {:zero => "д", :one => "д", :two => "д", :few => "д", :many => "д", :other => "д"},
             :kilometer => {:zero => "км", :one => "км", :two => "км", :few => "км", :many => "км", :other => "км"},
             :meter => {:zero => "м", :one => "м", :two => "м", :few => "м", :many => "м", :other => "м"},
