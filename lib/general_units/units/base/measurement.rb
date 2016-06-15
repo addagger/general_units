@@ -192,6 +192,28 @@ module GeneralUnits
       end
       ### ARITHMETICS END ###
       
+      ### SELECT UNITS START ###
+      
+      def self.select_units(*args)
+        options = args.extract_options!
+        systems = Array(options[:system]).map(&:to_sym)
+        only = Array(options[:only]).map(&:to_sym)
+        except = Array(options[:except]).map(&:to_sym)
+        list = (Array(args.first) if args.first)||self.units
+        if systems.present?
+          list = list.select {|u| u.system.in?(systems)}
+        end
+        if only.present?
+          list = list.select {|u| u.code.in?(only)}
+        end
+        if except.present?
+          list = list.select {|u| !u.code.in?(except)}
+        end
+        list
+      end
+      
+      ### SELECT UNITS END ###
+      
       private
 
       def valid_amount(other_object)
