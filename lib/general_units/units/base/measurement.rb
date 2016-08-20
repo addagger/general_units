@@ -87,7 +87,7 @@ module GeneralUnits
       def <=>(other_object)
         amount <=> valid_amount(other_object)
       rescue NoMethodError
-        raise ArgumentError, "Comparison of #{self.class} with #{val.inspect} failed"
+        raise ArgumentError, "Comparison of #{self.class} with #{other_object.inspect} failed"
       end
       
       def >(other_object)
